@@ -11,7 +11,7 @@ public class miCompilador {
         String filename = args[0];
         Lexer analyzer = new Lexer();
         List<Token> tokens = analyzer.analizarLexicamente(filename);
-        if (tokens != null) {
+        if (analyzer.getErrores().isEmpty()) {
             System.out.println("Analizis léxico completado sin errores");
             Parser parser = new Parser();
             boolean sintax = parser.analizarSintacticamente(tokens);

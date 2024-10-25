@@ -331,6 +331,10 @@ public class Lexer {
         }
     }
 
+    public List<String> getErrores() {
+        return errores;
+    }
+
     /**
      * Muestra la tabla de símbolos.
      */
