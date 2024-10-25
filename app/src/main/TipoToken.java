@@ -1,4 +1,4 @@
-package CompiladorL1.src.main.analizadorlexico.token;
+package main;
 
 /**
  * Enumeración TipoToken que define los distintos tipos de tokens

@@ -1,4 +1,4 @@
-package CompiladorL1.src.main.analizadorlexico.dfa;
+package main;
 
 import java.util.HashMap;
 import java.util.Map;

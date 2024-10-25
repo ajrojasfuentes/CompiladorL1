@@ -1,6 +1,4 @@
-package CompiladorL1.src.main;
-
-import CompiladorL1.src.main.analizadorlexico.Lexer;
+package main;
 
 public class miCompilador {
     public static void main(String[] args) {

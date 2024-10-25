@@ -1,4 +1,4 @@
-package CompiladorL1.src.main.analizadorlexico.simbolstable;
+package main;
 
 /**
  * Clase DefaultSymbolInfo que implementa la interfaz SymbolInfo.

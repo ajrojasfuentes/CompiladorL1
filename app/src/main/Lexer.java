@@ -1,15 +1,9 @@
-package CompiladorL1.src.main.analizadorlexico;
+package main;
 
 import java.io.*;
 import java.util.*;
 import java.util.logging.Logger;
 
-import CompiladorL1.src.main.analizadorlexico.dfa.DFA;
-import CompiladorL1.src.main.analizadorlexico.dfa.DefaultDFA;
-import CompiladorL1.src.main.analizadorlexico.simbolstable.DefaultTablaSimbolos;
-import CompiladorL1.src.main.analizadorlexico.token.DefaultToken;
-import CompiladorL1.src.main.analizadorlexico.token.TipoToken;
-import CompiladorL1.src.main.analizadorlexico.token.Token;
 
 /**
  * Clase faseLexica que implementa un analizador léxico para el lenguaje L1.
@@ -20,7 +14,7 @@ public class Lexer {
     private final Map<TipoToken, DFA> dfaMap;
     private final List<Token> tokens;
     private final List<String> errores;
-    private DefaultTablaSimbolos tablaSimbolos;
+    private final DefaultTablaSimbolos tablaSimbolos;
 
     /**
      * Constructor de la clase Lexer.

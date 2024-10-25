@@ -1,4 +1,4 @@
-package CompiladorL1.src.main.analizadorlexico.simbolstable;
+package main;
 
 /**
  * Interfaz TablaSimbolos que define las operaciones básicas para 

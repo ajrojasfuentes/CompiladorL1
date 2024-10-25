@@ -1,4 +1,4 @@
-package CompiladorL1.src.main.analizadorlexico.token;
+package main;
 
 /**
  * Interfaz Token que define los métodos que deben implementar

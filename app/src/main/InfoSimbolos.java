@@ -1,4 +1,4 @@
-package CompiladorL1.src.main.analizadorlexico.simbolstable;
+package main;
 
 /**
  * Interfaz InfoSimbolos que define la estructura para la información de un símbolo.

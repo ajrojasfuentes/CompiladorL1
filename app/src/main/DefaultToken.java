@@ -1,4 +1,4 @@
-package CompiladorL1.src.main.analizadorlexico.token;
+package main;
 
 /**
  * Clase DefaultToken que implementa la interfaz Token.

@@ -1,4 +1,4 @@
-package CompiladorL1.src.main.analizadorlexico.dfa;
+package main;
 
 /**
  * Interfaz DFA que define la estructura básica de un autómata finito determinista.
