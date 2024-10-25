@@ -238,7 +238,7 @@ public class Lexer {
      *
      * @param filePath La ruta del archivo que contiene el código fuente a analizar.
      */
-    public void analizarLexicamente(String filePath) {
+    public List<Token> analizarLexicamente(String filePath) {
         String programa = leerPrograma(filePath);
         String[] lineas = programa.split(System.lineSeparator());
         for (int i = 0; i < lineas.length; i++) {
@@ -261,6 +261,7 @@ public class Lexer {
         imprimirErrores();
         imprimirTokens();
         showtablaSimbolos();
+        return tokens;
     }
 
     /**
