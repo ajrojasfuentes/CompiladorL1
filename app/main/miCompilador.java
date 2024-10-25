@@ -9,6 +9,6 @@ public class miCompilador {
 
         String filename = args[0];
         Lexer analyzer = new Lexer();
-        analyzer.lexear(filename);
+        analyzer.analizarLexicamente(filename);
     }
 }

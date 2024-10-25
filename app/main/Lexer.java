@@ -1,20 +1,21 @@
 package main;
-
 import java.io.*;
 import java.util.*;
 import java.util.logging.Logger;
 
-
 /**
- * Clase faseLexica que implementa un analizador léxico para el lenguaje L1.
- * Esta clase se encarga de leer el código fuente, identificar y tokenizar
- * los elementos léxicos, así como registrar errores y gestionar una tabla de símbolos.
+ * La clase Lexer se encarga de realizar el análisis léxico de un código fuente.
+ * Consta de métodos para inicializar autómatas finitos deterministas (DFA) para diferentes tipos de tokens.
+ * También proporciona funcionalidad para leer archivos de código, identificar tokens y manejar errores léxicos.
  */
 public class Lexer {
     private final Map<TipoToken, DFA> dfaMap;
     private final List<Token> tokens;
     private final List<String> errores;
     private final DefaultTablaSimbolos tablaSimbolos;
+    private static final Logger LOGGER = Logger.getLogger(Lexer.class.getName());
+    private static final String FORMATO_MENSAJE_ERROR = "Error [Fase Lexica]: La linea %d contiene un error, lexema no reconocido: '%s'";
+    private static final int MAX_LONGITUD_LEXEMA = 12;
 
     /**
      * Constructor de la clase Lexer.
@@ -25,7 +26,6 @@ public class Lexer {
         this.tokens = new ArrayList<>();
         this.errores = new ArrayList<>();
         this.tablaSimbolos = new DefaultTablaSimbolos();
-
         Map<TipoToken, DFA> mydfaMap = new EnumMap<>(TipoToken.class);
         mydfaMap.put(TipoToken.IDENTIFICADOR, inicializarIdentificadorDFA());
         mydfaMap.put(TipoToken.NUMERO, inicializarDigitoDFA());
@@ -37,7 +37,6 @@ public class Lexer {
         mydfaMap.put(TipoToken.PARENTESIS_IZQ, inicializarParentesisIzqDFA());
         mydfaMap.put(TipoToken.PARENTESIS_DER, inicializarParentesisDerDFA());
         mydfaMap.put(TipoToken.PUNTO_COMA, inicializarPuntoYComaDFA());
-
         this.dfaMap = mydfaMap;
     }
 
@@ -158,38 +157,54 @@ public class Lexer {
     }
 
     /**
-     * Lee el contenido de un archivo de código fuente y lo devuelve como una cadena.
+     * Lee el contenido de un archivo de texto ubicado en la ruta especificada y lo devuelve como una cadena.
      *
-     * @param filePath Ruta del archivo a leer.
-     * @return El contenido del archivo como una cadena.
+     * @param filePath La ruta del archivo que se desea leer.
+     * @return El contenido del archivo como una cadena. Si ocurre un error durante la lectura, se devolverá una cadena vacía.
      */
-    public String leerPrograma(String filePath) {
-        StringBuilder contenido = new StringBuilder();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String codeLine;
-
-            // Leer cada línea y agregarla al StringBuilder
-            while ((codeLine = reader.readLine()) != null) {
-                contenido.append(codeLine).append(System.lineSeparator());  // Agrega un espacio entre líneas para mantener separación
+    private String leerArchivo(String filePath) {
+        StringBuilder contenidoArchivo = new StringBuilder();
+        try (BufferedReader lector = new BufferedReader(new FileReader(filePath))) {
+            String lineaCodigo;
+            while ((lineaCodigo = lector.readLine()) != null) {
+                contenidoArchivo.append(lineaCodigo).append(System.lineSeparator());
             }
-
         } catch (Exception e) {
-            Logger logger = Logger.getLogger(getClass().getName());
-            logger.info(e.getMessage());
+            LOGGER.info(e.getMessage());
         }
-
-        return contenido.toString().trim().replaceAll("[ \t]+", "");
+        return contenidoArchivo.toString();
     }
 
     /**
-     * Envía un mensaje de error si se encuentra un token no reconocido.
+     * Lee el contenido de un archivo de texto, eliminando espacios en blanco y tabulaciones redundantes.
      *
-     * @param token El token que generó el error.
+     * @param filePath La ruta del archivo que se desea leer.
+     * @return Una cadena que representa el contenido del archivo sin espacios en blanco ni tabulaciones redundantes.
+     */
+    public String leerPrograma(String filePath) {
+        String contenidoArchivo = leerArchivo(filePath);
+        return contenidoArchivo.trim().replaceAll("[ \t]+", "");
+    }
+
+    /**
+     * Crea el mensaje de error con el formato especificado.
+     *
+     * @param token       El token que generó el error.
+     * @param numeroLinea El número de línea donde se encontró el error.
+     * @return El mensaje de error formateado.
+     */
+    private String crearMensajeError(String token, int numeroLinea) {
+        return String.format(FORMATO_MENSAJE_ERROR, numeroLinea, token);
+    }
+
+    /**
+     * Reporta un mensaje de error si se encuentra un token no reconocido.
+     *
+     * @param token       El token que generó el error.
      * @param numeroLinea El número de línea donde se encontró el error.
      */
-    public void enviarError(String token, int numeroLinea) {
-        String errorMessage = String.format("Error [Fase Lexica]: La linea %d contiene un error, lexema no reconocido: '%s'", numeroLinea, token);
+    public void reportarError(String token, int numeroLinea) {
+        String errorMessage = crearMensajeError(token, numeroLinea);
         errores.add(errorMessage);
         tablaSimbolos.agregar(token, numeroLinea);
     }
@@ -210,76 +225,88 @@ public class Lexer {
                     return false;
                 })
                 .findFirst();
-
         if (tipoToken.isPresent()) {
             tokens.add(new DefaultToken(token, tipoToken.get()));
         } else {
-            enviarError(token, numeroLinea);
+            reportarError(token, numeroLinea);
         }
-
     }
 
     /**
-     * Realiza el análisis léxico de una expresión dada, identificando
-     * los tokens y verificando la validez de los paréntesis.
+     * Realiza el análisis léxico de un archivo de código fuente, tokenizando
+     * identificadores, dígitos y otros símbolos.
      *
-     * @param filePath La ruta del archivo con la entrada a analizar.
+     * @param filePath La ruta del archivo que contiene el código fuente a analizar.
      */
-    public void lexear(String filePath) {
-
+    public void analizarLexicamente(String filePath) {
         String programa = leerPrograma(filePath);
-
         String[] lineas = programa.split(System.lineSeparator());
-
         for (int i = 0; i < lineas.length; i++) {
             String linea = lineas[i]; // Obtener la línea actual
             int numeroLinea = i + 1;  // El número de línea, comenzando desde 1
-
-            // Inicializar variables para el lexema y el recorrido de caracteres
             StringBuilder lexema = new StringBuilder();
-
-            // Segundo ciclo que recorre la línea carácter por carácter
             for (int j = 0; j < linea.length(); j++) {
                 char caracter = linea.charAt(j);
-
-                // Verificar si es una letra minúscula
                 if (Character.isLowerCase(caracter)) {
-                    lexema.append(caracter); // Concatenar al lexema
-                    // Continuar mientras el siguiente caracter sea también una letra minúscula
-                    while (j + 1 < linea.length() && Character.isLowerCase(linea.charAt(j + 1))) {
-                        j++; // Avanzar al siguiente carácter
-                        lexema.append(linea.charAt(j));
-                    }
-                    if (lexema.length() > 12){
-                        enviarError (lexema.toString(), numeroLinea);
-                        break;
-                    }
-                    tokenizar(lexema.toString(), numeroLinea);
-                    lexema.setLength(0); // Reiniciar el lexema después de guardarlo
-                }
-                // Verificar si es un dígito
-                else if (Character.isDigit(caracter)) {
-                    lexema.append(caracter); // Concatenar al lexema
-                    // Continuar mientras el siguiente carácter sea también un dígito
-                    while (j + 1 < linea.length() && Character.isDigit(linea.charAt(j + 1))) {
-                        j++; // Avanzar al siguiente carácter
-                        lexema.append(linea.charAt(j));
-                    }
-                    tokenizar(lexema.toString(), numeroLinea);
-                    lexema.setLength(0); // Reiniciar el lexema después de guardarlo
-                }
-                // Si el carácter es otro, lo tratamos como un lexema independiente
-                else {
+                    j = procesarIdentificador(linea, lexema, numeroLinea, j);
+                } else if (Character.isDigit(caracter)) {
+                    j = procesarDigito(linea, lexema, numeroLinea, j);
+                } else {
                     lexema.append(caracter);
                     tokenizar(lexema.toString(), numeroLinea);
                     lexema.setLength(0);
                 }
             }
         }
-
         imprimirErrores();
         imprimirTokens();
         showtablaSimbolos();
+    }
+
+    /**
+     * Procesa un identificador en una línea de código fuente, acumulando todos los
+     * caracteres consecutivos que sean letras minúsculas.
+     *
+     * @param linea La línea de código fuente que se está procesando.
+     * @param lexema El StringBuilder usado para acumular el lexema.
+     * @param numeroLinea El número de línea actual que se está procesando.
+     * @param j El índice actual en la línea de código fuente.
+     * @return El índice actualizado después de procesar el identificador.
+     */
+    private int procesarIdentificador(String linea, StringBuilder lexema, int numeroLinea, int j) {
+        lexema.append(linea.charAt(j));
+        while (j + 1 < linea.length() && Character.isLowerCase(linea.charAt(j + 1))) {
+            j++;
+            lexema.append(linea.charAt(j));
+        }
+        if (lexema.length() > MAX_LONGITUD_LEXEMA) {
+            reportarError(lexema.toString(), numeroLinea);
+        } else {
+            tokenizar(lexema.toString(), numeroLinea);
+        }
+        lexema.setLength(0);
+        return j;
+    }
+
+    /**
+     * Procesa un carácter de dígito en una línea de código fuente,
+     * acumulando todos los caracteres consecutivos que también sean dígitos.
+     *
+     * @param linea La línea de código fuente que se está procesando.
+     * @param lexema El StringBuilder usado para acumular el lexema.
+     * @param numeroLinea El número de línea actual que se está procesando.
+     * @param j El índice actual en la línea de código fuente.
+     * @return El índice actualizado después de procesar los dígitos.
+     */
+    private int procesarDigito(String linea, StringBuilder lexema, int numeroLinea, int j) {
+        lexema.append(linea.charAt(j));
+        while (j + 1 < linea.length() && Character.isDigit(linea.charAt(j + 1))) {
+            j++;
+            lexema.append(linea.charAt(j));
+        }
+        tokenizar(lexema.toString(), numeroLinea);
+        lexema.setLength(0);
+        return j;
     }
 
     /**

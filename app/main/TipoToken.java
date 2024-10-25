@@ -14,6 +14,5 @@ public enum TipoToken {
     ASIGNACION,
     PUNTO_COMA,
     PARENTESIS_IZQ,
-    PARENTESIS_DER,
-    ERROR
+    PARENTESIS_DER
 }
