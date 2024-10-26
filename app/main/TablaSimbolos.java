@@ -20,8 +20,9 @@ public interface TablaSimbolos {
      * @param lexema El lexema del símbolo a buscar.
      * @return La información del símbolo, o null si no se encuentra.
      */
-    DefaultSymbolInfo obtener(String lexema);
-    
+    DefaultSymbolInfo obtenerPorLexema(String lexema);
+
+    TablaSimbolosEntrada obtenerPorIndice(int indice);
     /**
      * Verifica si un lexema existe en la tabla de símbolos.
      * 
@@ -31,14 +32,15 @@ public interface TablaSimbolos {
     boolean contiene(String lexema);
     
     /**
-     * Muestra todos los símbolos y sus respectivas líneas en la tabla.
-     */
-    void mostrar();
-    
-    /**
      * Elimina un símbolo de la tabla.
      * 
      * @param lexema El lexema del símbolo a eliminar.
      */
     void eliminar(String lexema);
+
+    /**
+     * Guarda la tabla de simbolos en un archivo txt
+     *
+     */
+    void guardarEnArchivo();
 }

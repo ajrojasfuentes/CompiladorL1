@@ -5,9 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="06bc2691-b7ae-48e3-aace-59657f37cd7b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app/main/TablaSimbolosEntrada.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/DefaultTablaSimbolos.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/DefaultTablaSimbolos.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/DefaultTablaSimbolos.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/DefaultTablaSimbolos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/main/Lexer.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/Lexer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/main/Lexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/Lexer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/Parser.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/Parser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/TablaSimbolos.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/TablaSimbolos.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/TablaSimbolos.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/TablaSimbolos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/main/miCompilador.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/miCompilador.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/main/miCompilador.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/miCompilador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lexCorrecto1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lexCorrecto1.txt" afterDir="false" />
@@ -17,9 +24,28 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "ajrojasfuentes"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/ajrojasfuentes/CompiladorL1.git",
+    "accountId": "53eb56fb-bc90-46a3-92b3-81b5326316ff"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -70,6 +96,7 @@
       <workItem from="1729829586784" duration="22048000" />
       <workItem from="1729854704993" duration="350000" />
       <workItem from="1729886971809" duration="351000" />
+      <workItem from="1729897233930" duration="4584000" />
     </task>
     <servers />
   </component>

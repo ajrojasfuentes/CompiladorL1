@@ -11,11 +11,14 @@ import java.util.List;
 public class Parser {
     private final TablaParseo tabla;
     private final Stack<String> pila;
+    private final TablaSimbolos tablaSimbolos;
     private static final String SIMBOLO_CIERRE = "$";
+    int indiceTablaSimbolos = 0;
 
-    public Parser() {
+    public Parser(TablaSimbolos tablaSimbolos) {
         this.tabla = new TablaParseo();
         this.pila = new Stack<>();
+        this.tablaSimbolos = tablaSimbolos;
     }
 
     public boolean analizarSintacticamente(List<Token> tokens) {
@@ -24,7 +27,11 @@ public class Parser {
             String simboloActual = pila.pop();
             Token primerToken = tokens.getFirst();
             String simboloEntrada = primerToken.obtenerAtributo().toString();
-            if (!compararSimbolos(simboloActual, simboloEntrada, tokens)) return false;
+            if (!compararSimbolos(simboloActual, simboloEntrada, tokens)) {
+                reportarError("Error [Fase Sintáctica]: La línea" + tablaSimbolos.obtenerPorIndice(indiceTablaSimbolos).getLinea() + "contiene un error en su gramática, falta token ; " + tabla.SimbolosEsperados(simboloActual));
+                tablaSimbolos.eliminar(simboloEntrada);
+                return false;
+            }
         }
         return compararSimbolos(pila.pop(), SIMBOLO_CIERRE, tokens) && pila.isEmpty() && tokens.isEmpty();
     }
@@ -34,18 +41,16 @@ public class Parser {
         if (esTerminal(simboloActual)) {
             if (simboloActual.equals(simboloEntrada)) {
                 tokens.removeFirst();
+                indiceTablaSimbolos++;
             } else {
-                reportarError("Error: Se esperaba " + simboloActual + " pero se encontró " + simboloEntrada);
                 return false;
             }
         } else {
             String produccion = tabla.obtenerProduccion(simboloActual, simboloEntrada);
             if (produccion == null) {
                 if (simboloEntrada.equals(SIMBOLO_CIERRE)) {
-                    reportarError("Error: Se esperaba PUNTO_COMA pero se encontró " + SIMBOLO_CIERRE);
                     return false;
                 }
-                reportarError("Error: Se esperaba " + tabla.SimbolosEsperados(simboloActual) + " pero se encontró " + simboloEntrada);
                 return false;
             } else if (!produccion.isEmpty()) {
                 String[] simbolos = produccion.split(" ");

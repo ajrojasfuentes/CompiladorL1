@@ -1,41 +1,64 @@
 package main;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
-/**
- * Clase DefaultTablaSimbolos que gestiona una tabla de símbolos.
- * Almacena información sobre los símbolos en un mapa, permitiendo 
- * agregar, obtener, verificar la existencia, mostrar y eliminar símbolos.
- */
 public class DefaultTablaSimbolos implements TablaSimbolos {
-    private final Map<String, DefaultSymbolInfo> tabla;
+    private List<TablaSimbolosEntrada> tabla;
 
-    /**
-     * Constructor que inicializa la tabla de símbolos.
-     */
     public DefaultTablaSimbolos() {
-        this.tabla = new HashMap<>();
+        this.tabla = new ArrayList<>();
     }
 
+    @Override
     public void agregar(String lexema, int linea) {
-        tabla.put(lexema, new DefaultSymbolInfo(lexema, linea));
+        if (!contiene(lexema)) {
+            tabla.add(new TablaSimbolosEntrada(lexema, linea));
+        }
     }
 
-    public DefaultSymbolInfo obtener(String lexema) {
-        return tabla.get(lexema);
+    @Override
+    public DefaultSymbolInfo obtenerPorLexema(String lexema) {
+        for (TablaSimbolosEntrada entrada : tabla) {
+            if (entrada.getLexema().equals(lexema)) {
+                return new DefaultSymbolInfo(entrada.getLexema(), entrada.getLinea());
+            }
+        }
+        return null;
     }
 
+    @Override
+    public TablaSimbolosEntrada obtenerPorIndice(int indice) {
+      return tabla.get(indice);
+    }
+
+    @Override
     public boolean contiene(String lexema) {
-        return tabla.containsKey(lexema);
+        for (TablaSimbolosEntrada entrada : tabla) {
+            if (entrada.getLexema().equals(lexema)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public void mostrar() {
-        tabla.forEach((llave, valor) -> 
-            System.out.println("Lexema: " + llave + ", Línea: " + valor.obtenerLinea()));
-    }
-
+    @Override
     public void eliminar(String lexema) {
-        tabla.remove(lexema);
+        tabla.removeIf(entrada -> entrada.getLexema().equals(lexema));
+    }
+
+    @Override
+    public void guardarEnArchivo() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Tabla_de_simbolos.txt"))) {
+            for (TablaSimbolosEntrada entrada : tabla) {
+                writer.write("Lexema: " + entrada.getLexema() + ", Línea: " + entrada.getLinea());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error al guardar la tabla en el archivo: " + e.getMessage());
+        }
     }
 }

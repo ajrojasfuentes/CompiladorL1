@@ -12,7 +12,7 @@ public class Lexer {
     private final Map<TipoToken, DFA> dfaMap;
     private final List<Token> tokens;
     private final List<String> errores;
-    private final DefaultTablaSimbolos tablaSimbolos;
+    private final TablaSimbolos tablaSimbolos;
     private static final Logger LOGGER = Logger.getLogger(Lexer.class.getName());
     private static final String FORMATO_MENSAJE_ERROR = "Error [Fase Lexica]: La linea %d contiene un error, lexema no reconocido: '%s'";
     private static final int MAX_LONGITUD_LEXEMA = 12;
@@ -22,10 +22,10 @@ public class Lexer {
      * Inicializa la lista de tokens, la lista de errores y la tabla de símbolos.
      * También configura los DFAs para cada tipo de token.
      */
-    public Lexer() {
+    public Lexer(TablaSimbolos tablaSimbolos) {
         this.tokens = new ArrayList<>();
         this.errores = new ArrayList<>();
-        this.tablaSimbolos = new DefaultTablaSimbolos();
+        this.tablaSimbolos = tablaSimbolos;
         Map<TipoToken, DFA> mydfaMap = new EnumMap<>(TipoToken.class);
         mydfaMap.put(TipoToken.IDENTIFICADOR, inicializarIdentificadorDFA());
         mydfaMap.put(TipoToken.NUMERO, inicializarDigitoDFA());
@@ -206,7 +206,6 @@ public class Lexer {
     public void reportarError(String token, int numeroLinea) {
         String errorMessage = crearMensajeError(token, numeroLinea);
         errores.add(errorMessage);
-        tablaSimbolos.agregar(token, numeroLinea);
     }
 
     /**
@@ -227,6 +226,7 @@ public class Lexer {
                 .findFirst();
         if (tipoToken.isPresent()) {
             tokens.add(new DefaultToken(token, tipoToken.get()));
+            tablaSimbolos.agregar(token, numeroLinea);
         } else {
             reportarError(token, numeroLinea);
         }
@@ -260,7 +260,6 @@ public class Lexer {
         }
         imprimirErrores();
         imprimirTokens();
-        showtablaSimbolos();
         return tokens;
     }
 
@@ -336,9 +335,29 @@ public class Lexer {
     }
 
     /**
-     * Muestra la tabla de símbolos.
+     * Guarda los tokens y errores en un archivo de texto llamado "Lexer_out.txt".
+     *
+     * Si no se encuentran errores, se escriben todos los tokens en el archivo.
+     * Si hay errores, se escriben los errores en el archivo.
+     *
+     * Maneja posibles excepciones de E/S y las reporta en la salida estándar.
      */
-    public void showtablaSimbolos() {
-        tablaSimbolos.mostrar();
+    public void guardarEnArchivo() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Lexer_out.txt"))) {
+            if(errores.isEmpty()) {
+                for (Token token : tokens) {
+                    writer.write(String.valueOf(token));
+                    writer.newLine();
+                }
+            }
+            for (String error : errores) {
+                writer.write(String.valueOf(error));
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error al guardar el archivo de salida del Lexer: " + e.getMessage());
+        }
     }
 }
+
+
