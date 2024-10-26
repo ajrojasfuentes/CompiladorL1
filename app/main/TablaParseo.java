@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This class represents a parsing table for a context-free grammar.
- * It is used to determine the next set of production rules to apply
- * based on the current non-terminal symbol and the next input symbol.
+ * Esta clase representa una tabla de parseo para una gramática libre de contexto.
+ * Se utiliza para determinar el próximo conjunto de reglas de producción a aplicar
+ * basado en el símbolo no terminal actual y el siguiente símbolo de entrada.
  */
 class TablaParseo {
     private static final String P = "P";
@@ -22,10 +22,22 @@ class TablaParseo {
 
     private final Map<String, Map<String, String>> tabla;
 
+    /**
+     * Esta clase representa una tabla de parseo para una gramática libre de contexto.
+     * Se utiliza para determinar el próximo conjunto de reglas de producción a aplicar
+     * basado en el símbolo no terminal actual y el siguiente símbolo de entrada.
+     */
     public TablaParseo() {
         this.tabla = crearTablaParseo();
     }
 
+    /**
+     * Crea y retorna la tabla de parseo.
+     * La tabla es un mapa que asocia símbolos no terminales a mapas, los cuales a su vez
+     * asocian símbolos de entrada con sus correspondientes producciones.
+     *
+     * @return La tabla de parseo.
+     */
     public static Map<String, Map<String, String>> crearTablaParseo() {
         Map<String, Map<String, String>> tabla = new HashMap<>();
         agregarEntradasNoTerminal(tabla, P, new String[][]{
@@ -83,6 +95,14 @@ class TablaParseo {
         return tabla;
     }
 
+    /**
+     * Agrega las entradas correspondientes a un no terminal a la tabla de parseo.
+     *
+     * @param tabla   La tabla de parseo donde se agregarán las entradas.
+     * @param noTerminal El símbolo no terminal para el cual se agregarán las entradas.
+     * @param entradas Un arreglo de entradas, donde cada entrada es un arreglo de dos elementos:
+     *                 el símbolo de entrada y la producción correspondiente.
+     */
     private static void agregarEntradasNoTerminal(Map<String, Map<String, String>> tabla, String noTerminal, String[][] entradas) {
         tabla.put(noTerminal, new HashMap<>());
         for (String[] entrada : entradas) {
@@ -90,10 +110,23 @@ class TablaParseo {
         }
     }
 
+    /**
+     * Obtiene la producción a aplicar para un par dado de símbolos.
+     *
+     * @param simboloPila    El símbolo no terminal en la cima de la pila de parseo.
+     * @param simboloEntrada El siguiente símbolo de entrada.
+     * @return La producción correspondiente, o null si no hay ninguna producción definida para el par dado.
+     */
     public String obtenerProduccion(String simboloPila, String simboloEntrada) {
         return tabla.getOrDefault(simboloPila, new HashMap<>()).get(simboloEntrada);
     }
 
+    /**
+     * Retorna los símbolos de entrada esperados para un no terminal dado.
+     *
+     * @param noTerminal El símbolo no terminal para el cual se desean conocer los símbolos de entrada esperados.
+     * @return Una cadena de texto con los símbolos de entrada esperados, separados por comas.
+     */
     public String SimbolosEsperados(String noTerminal) {
         if (tabla.containsKey(noTerminal)) {
             Map<String, String> producciones = tabla.get(noTerminal);

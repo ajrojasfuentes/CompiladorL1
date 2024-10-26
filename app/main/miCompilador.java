@@ -5,8 +5,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * miCompilador es una clase que simula el funcionamiento de un compilador simple.
+ * Realiza análisis léxico y sintáctico de un archivo de entrada y genera un archivo de salida con los resultados.
+ */
 public class miCompilador {
 
+    /**
+     * Punto de entrada del programa.
+     * Se esperan dos argumentos: la ruta del archivo de entrada y la ruta del archivo de salida.
+     *
+     * @param args Argumentos de línea de comandos: [RUTA DE ARCHIVO DE ENTRADA] [RUTA DE ARCHIVO DE SALIDA]
+     */
     public static void main(String[] args) {
         if (args.length != 2) {
             System.err.println("Uso: java miCompilador [RUTA DE ARCHIVO DE ENTRADA] [RUTA DE ARCHIVO DE SALIDA]");

@@ -4,7 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="06bc2691-b7ae-48e3-aace-59657f37cd7b" name="Changes" comment="" />
+    <list default="true" id="06bc2691-b7ae-48e3-aace-59657f37cd7b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/DefaultDFA.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/DefaultDFA.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/DefaultDFA.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/DefaultDFA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/DefaultSymbolInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/DefaultSymbolInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/DefaultSymbolInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/DefaultSymbolInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/DefaultTablaSimbolos.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/DefaultTablaSimbolos.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/DefaultTablaSimbolos.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/DefaultTablaSimbolos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/DefaultToken.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/DefaultToken.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/DefaultToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/DefaultToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/Lexer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/Parser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/TablaParseo.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/TablaParseo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/TablaParseo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/TablaParseo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/TablaSimbolosEntrada.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/TablaSimbolosEntrada.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/TablaSimbolosEntrada.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/TablaSimbolosEntrada.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/faseLexica.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/faseLexica.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/faseLexica.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/faseLexica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/faseSintactica.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/faseSintactica.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/faseSintactica.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/faseSintactica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/miCompilador.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/miCompilador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/miCompilador.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/miCompilador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tablaDeSimbolos.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/tablaDeSimbolos.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -84,6 +107,7 @@
       <workItem from="1729886971809" duration="351000" />
       <workItem from="1729897233930" duration="8276000" />
       <workItem from="1729907545581" duration="1312000" />
+      <workItem from="1729910325458" duration="2366000" />
     </task>
     <servers />
   </component>

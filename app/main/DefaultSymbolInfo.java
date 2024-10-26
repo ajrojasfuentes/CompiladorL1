@@ -20,16 +20,31 @@ public class DefaultSymbolInfo implements InfoSimbolos {
         this.lineaCodigo = lineaActual;
     }
 
+    /**
+     * Obtiene el lexema asociado a este símbolo.
+     *
+     * @return el lexema del símbolo.
+     */
     @Override
     public String obtenerLexema() {
         return lexema;
     }
 
+    /**
+     * Obtiene el número de línea donde se encuentra este símbolo en el código.
+     *
+     * @return Número de línea del símbolo.
+     */
     @Override
     public int obtenerLinea() {
         return lineaCodigo;
     }
 
+    /**
+     * Devuelve una representación en cadena del objeto DefaultSymbolInfo.
+     *
+     * @return Cadena que contiene el lexema y el número de línea del símbolo.
+     */
     @Override
     public String toString() {
         return "Lexema: " + lexema + ", Línea: " + lineaCodigo;

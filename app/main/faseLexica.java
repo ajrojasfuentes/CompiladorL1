@@ -4,9 +4,8 @@ import java.util.*;
 import java.util.logging.Logger;
 
 /**
- * La clase Lexer se encarga de realizar el análisis léxico de un código fuente.
- * Consta de métodos para inicializar autómatas finitos deterministas (DFA) para diferentes tipos de tokens.
- * También proporciona funcionalidad para leer archivos de código, identificar tokens y manejar errores léxicos.
+ * La clase FaseLexica se encarga de la fase léxica del compilador, donde se realiza el análisis léxico del código fuente.
+ * Esta fase convierte una secuencia de caracteres en una secuencia de tokens significativos que pueden ser usados en las fases posteriores del compilador.
  */
 public class faseLexica {
     private final Map<TipoToken, DFA> dfaMap;
@@ -18,9 +17,9 @@ public class faseLexica {
     private static final int MAX_LONGITUD_LEXEMA = 12;
 
     /**
-     * Constructor de la clase Lexer.
-     * Inicializa la lista de tokens, la lista de errores y la tabla de símbolos.
-     * También configura los DFAs para cada tipo de token.
+     * Inicializa una nueva instancia de la clase {@code FaseLexica}.
+     *
+     * @param tablaSimbolos La tabla de símbolos usada en el análisis léxico.
      */
     public faseLexica(TablaSimbolos tablaSimbolos) {
         this.tokens = new ArrayList<>();
