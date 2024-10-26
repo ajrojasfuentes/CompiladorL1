@@ -15,9 +15,7 @@ public class DefaultTablaSimbolos implements TablaSimbolos {
 
     @Override
     public void agregar(String lexema, int linea) {
-        if (!contiene(lexema)) {
             tabla.add(new TablaSimbolosEntrada(lexema, linea));
-        }
     }
 
     @Override

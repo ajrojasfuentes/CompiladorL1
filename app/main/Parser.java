@@ -28,7 +28,7 @@ public class Parser {
             Token primerToken = tokens.getFirst();
             String simboloEntrada = primerToken.obtenerAtributo().toString();
             if (!compararSimbolos(simboloActual, simboloEntrada, tokens)) {
-                reportarError("Error [Fase Sintáctica]: La línea" + tablaSimbolos.obtenerPorIndice(indiceTablaSimbolos).getLinea() + "contiene un error en su gramática, falta token ; " + tabla.SimbolosEsperados(simboloActual));
+                reportarError("Error [Fase Sintáctica]: La línea " + tablaSimbolos.obtenerPorIndice(indiceTablaSimbolos).getLinea() + " contiene un error en su gramática, falta token " + simboloActual);
                 tablaSimbolos.eliminar(simboloEntrada);
                 return false;
             }
