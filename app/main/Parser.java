@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Stack;
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class Parser {
     private final TablaParseo tabla;
     private final Stack<String> pila;
     private final TablaSimbolos tablaSimbolos;
+    private final List<String> errores;
     private static final String SIMBOLO_CIERRE = "$";
     int indiceTablaSimbolos = 0;
 
@@ -19,6 +21,7 @@ public class Parser {
         this.tabla = new TablaParseo();
         this.pila = new Stack<>();
         this.tablaSimbolos = tablaSimbolos;
+        this.errores = new ArrayList<>();
     }
 
     public boolean analizarSintacticamente(List<Token> tokens) {
@@ -37,7 +40,7 @@ public class Parser {
     }
 
     private boolean compararSimbolos(String simboloActual, String simboloEntrada, List<Token> tokens) {
-        imprimirSimbolos(simboloActual, simboloEntrada);
+        //imprimirSimbolos(simboloActual, simboloEntrada);
         if (esTerminal(simboloActual)) {
             if (simboloActual.equals(simboloEntrada)) {
                 tokens.removeFirst();
@@ -76,7 +79,14 @@ public class Parser {
         }
     }
 
+    public List<String> getErrores() {
+        return errores;
+    }
+
     private void reportarError(String mensaje) {
         System.err.println(mensaje);
+        errores.add(mensaje);
     }
+
+
 }

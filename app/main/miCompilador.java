@@ -1,4 +1,7 @@
 package main;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 public class miCompilador {
@@ -13,10 +16,15 @@ public class miCompilador {
         DefaultTablaSimbolos tablaSimbolos = new DefaultTablaSimbolos();
         Lexer lexer = new Lexer(tablaSimbolos);
         Parser parser = new Parser(tablaSimbolos);
+        List<String> erroresLexer;
+        List<String> erroresParser;
+        List<Token> tokens;
 
 
-        List<Token> tokens = lexer.analizarLexicamente(filename);
-        if (lexer.getErrores().isEmpty()) {
+        tokens = lexer.analizarLexicamente(filename);
+        erroresLexer = lexer.getErrores();
+
+        if (erroresLexer.isEmpty()) {
             System.out.println("--------------------------------------");
             System.out.println("Analizis léxico completado sin errores");
             System.out.println("--------------------------------------");
@@ -28,6 +36,27 @@ public class miCompilador {
             }
         }
 
+        erroresParser = parser.getErrores();
+
         tablaSimbolos.guardarEnArchivo();
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Compilador_out.txt"))) {
+            if(erroresLexer.isEmpty()) {
+                for (Token token : tokens) {
+                    writer.write(String.valueOf(token));
+                    writer.newLine();
+                }
+            }
+            for (String error : erroresLexer) {
+                writer.write(String.valueOf(error));
+                writer.newLine();
+            }
+            for (String error : erroresParser) {
+                writer.write(String.valueOf(error));
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error al guardar el archivo de salida del Lexer: " + e.getMessage());
+        }
     }
 }

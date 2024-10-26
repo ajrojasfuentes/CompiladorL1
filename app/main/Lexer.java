@@ -333,31 +333,6 @@ public class Lexer {
     public List<String> getErrores() {
         return errores;
     }
-
-    /**
-     * Guarda los tokens y errores en un archivo de texto llamado "Lexer_out.txt".
-     *
-     * Si no se encuentran errores, se escriben todos los tokens en el archivo.
-     * Si hay errores, se escriben los errores en el archivo.
-     *
-     * Maneja posibles excepciones de E/S y las reporta en la salida estándar.
-     */
-    public void guardarEnArchivo() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Lexer_out.txt"))) {
-            if(errores.isEmpty()) {
-                for (Token token : tokens) {
-                    writer.write(String.valueOf(token));
-                    writer.newLine();
-                }
-            }
-            for (String error : errores) {
-                writer.write(String.valueOf(error));
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            System.out.println("Error al guardar el archivo de salida del Lexer: " + e.getMessage());
-        }
-    }
 }
 
 
