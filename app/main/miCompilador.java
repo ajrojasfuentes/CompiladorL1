@@ -2,6 +2,7 @@ package main;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class miCompilador {
@@ -20,18 +21,19 @@ public class miCompilador {
         List<String> erroresParser;
         List<Token> tokens;
 
-
         tokens = lexer.analizarLexicamente(filename);
         erroresLexer = lexer.getErrores();
 
+        List<Token> tokensCopia = new ArrayList<>(tokens);
+
         if (erroresLexer.isEmpty()) {
             System.out.println("--------------------------------------");
-            System.out.println("Analizis léxico completado sin errores");
+            System.out.println("Análisis léxico completado sin errores");
             System.out.println("--------------------------------------");
             boolean sintax = parser.analizarSintacticamente(tokens);
             if (sintax) {
                 System.out.println("------------------------------------------");
-                System.out.println("Analizis sintáctico completado sin errores");
+                System.out.println("Análisis sintáctico completado sin errores");
                 System.out.println("------------------------------------------");
             }
         }
@@ -41,18 +43,18 @@ public class miCompilador {
         tablaSimbolos.guardarEnArchivo();
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("Compilador_out.txt"))) {
-            if(erroresLexer.isEmpty()) {
-                for (Token token : tokens) {
+            if (erroresLexer.isEmpty()) {
+                for (Token token : tokensCopia) {
                     writer.write(String.valueOf(token));
                     writer.newLine();
                 }
             }
             for (String error : erroresLexer) {
-                writer.write(String.valueOf(error));
+                writer.write(error);
                 writer.newLine();
             }
             for (String error : erroresParser) {
-                writer.write(String.valueOf(error));
+                writer.write(error);
                 writer.newLine();
             }
         } catch (IOException e) {
