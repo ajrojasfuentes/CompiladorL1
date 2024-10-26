@@ -9,7 +9,7 @@ import java.util.List;
  * It leverages a stack-based approach to compare input tokens against expected symbols
  * according to production rules.
  */
-public class Parser {
+public class faseSintactica {
     private final TablaParseo tabla;
     private final Stack<String> pila;
     private final TablaSimbolos tablaSimbolos;
@@ -17,7 +17,7 @@ public class Parser {
     private static final String SIMBOLO_CIERRE = "$";
     int indiceTablaSimbolos = 0;
 
-    public Parser(TablaSimbolos tablaSimbolos) {
+    public faseSintactica(TablaSimbolos tablaSimbolos) {
         this.tabla = new TablaParseo();
         this.pila = new Stack<>();
         this.tablaSimbolos = tablaSimbolos;

@@ -8,12 +8,12 @@ import java.util.logging.Logger;
  * Consta de métodos para inicializar autómatas finitos deterministas (DFA) para diferentes tipos de tokens.
  * También proporciona funcionalidad para leer archivos de código, identificar tokens y manejar errores léxicos.
  */
-public class Lexer {
+public class faseLexica {
     private final Map<TipoToken, DFA> dfaMap;
     private final List<Token> tokens;
     private final List<String> errores;
     private final TablaSimbolos tablaSimbolos;
-    private static final Logger LOGGER = Logger.getLogger(Lexer.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(faseLexica.class.getName());
     private static final String FORMATO_MENSAJE_ERROR = "Error [Fase Lexica]: La linea %d contiene un error, lexema no reconocido: '%s'";
     private static final int MAX_LONGITUD_LEXEMA = 12;
 
@@ -22,7 +22,7 @@ public class Lexer {
      * Inicializa la lista de tokens, la lista de errores y la tabla de símbolos.
      * También configura los DFAs para cada tipo de token.
      */
-    public Lexer(TablaSimbolos tablaSimbolos) {
+    public faseLexica(TablaSimbolos tablaSimbolos) {
         this.tokens = new ArrayList<>();
         this.errores = new ArrayList<>();
         this.tablaSimbolos = tablaSimbolos;

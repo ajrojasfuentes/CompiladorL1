@@ -55,7 +55,7 @@ public class DefaultTablaSimbolos implements TablaSimbolos {
 
     @Override
     public void guardarEnArchivo() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Tabla_de_simbolos.txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("tablaDeSimbolos.txt"))) {
             for (TablaSimbolosEntrada entrada : tabla) {
                 writer.write("Lexema: " + entrada.getLexema() + ", Línea: " + entrada.getLinea());
                 writer.newLine();

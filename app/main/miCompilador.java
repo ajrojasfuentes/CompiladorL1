@@ -8,21 +8,22 @@ import java.util.List;
 public class miCompilador {
 
     public static void main(String[] args) {
-        if (args.length != 1) {
-            System.err.println("Uso: java miCompilador [ARCHIVO DE ENTRADA]");
+        if (args.length != 2) {
+            System.err.println("Uso: java miCompilador [RUTA DE ARCHIVO DE ENTRADA] [RUTA DE ARCHIVO DE SALIDA]");
             return;
         }
 
-        String filename = args[0];
+        String archivoEntrada = args[0];
+        String archivoSalida = args[1]; // Ruta del archivo de salida
         DefaultTablaSimbolos tablaSimbolos = new DefaultTablaSimbolos();
-        Lexer lexer = new Lexer(tablaSimbolos);
-        Parser parser = new Parser(tablaSimbolos);
+        faseLexica faseLexica = new faseLexica(tablaSimbolos);
+        faseSintactica faseSintactica = new faseSintactica(tablaSimbolos);
         List<String> erroresLexer;
         List<String> erroresParser;
         List<Token> tokens;
 
-        tokens = lexer.analizarLexicamente(filename);
-        erroresLexer = lexer.getErrores();
+        tokens = faseLexica.analizarLexicamente(archivoEntrada);
+        erroresLexer = faseLexica.getErrores();
 
         List<Token> tokensCopia = new ArrayList<>(tokens);
 
@@ -30,7 +31,7 @@ public class miCompilador {
             System.out.println("--------------------------------------");
             System.out.println("Análisis léxico completado sin errores");
             System.out.println("--------------------------------------");
-            boolean sintax = parser.analizarSintacticamente(tokens);
+            boolean sintax = faseSintactica.analizarSintacticamente(tokens);
             if (sintax) {
                 System.out.println("------------------------------------------");
                 System.out.println("Análisis sintáctico completado sin errores");
@@ -38,11 +39,10 @@ public class miCompilador {
             }
         }
 
-        erroresParser = parser.getErrores();
-
+        erroresParser = faseSintactica.getErrores();
         tablaSimbolos.guardarEnArchivo();
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Compilador_out.txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivoSalida))) {
             if (erroresLexer.isEmpty()) {
                 for (Token token : tokensCopia) {
                     writer.write(String.valueOf(token));
@@ -58,7 +58,7 @@ public class miCompilador {
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.out.println("Error al guardar el archivo de salida del Lexer: " + e.getMessage());
+            System.out.println("Error al guardar el archivo de salida: " + e.getMessage());
         }
     }
 }
