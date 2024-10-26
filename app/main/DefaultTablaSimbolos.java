@@ -49,6 +49,11 @@ public class DefaultTablaSimbolos implements TablaSimbolos {
     }
 
     @Override
+    public void eliminar(int numeroLinea) {
+        tabla.removeIf(entrada -> entrada.getLinea() == numeroLinea);
+    }
+
+    @Override
     public void guardarEnArchivo() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("Tabla_de_simbolos.txt"))) {
             for (TablaSimbolosEntrada entrada : tabla) {

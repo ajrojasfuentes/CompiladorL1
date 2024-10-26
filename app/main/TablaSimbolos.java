@@ -38,6 +38,8 @@ public interface TablaSimbolos {
      */
     void eliminar(String lexema);
 
+    void eliminar(int numeroLinea);
+
     /**
      * Guarda la tabla de simbolos en un archivo txt
      *

@@ -31,7 +31,8 @@ public class Parser {
             Token primerToken = tokens.getFirst();
             String simboloEntrada = primerToken.obtenerAtributo().toString();
             if (!compararSimbolos(simboloActual, simboloEntrada, tokens)) {
-                tablaSimbolos.eliminar(simboloEntrada);
+                reportarError("Se han eliminado las coincidencias de error detectadas de la tabla de símbolos en la linea: " + tablaSimbolos.obtenerPorIndice(indiceTablaSimbolos-1).getLinea());
+                tablaSimbolos.eliminar(tablaSimbolos.obtenerPorIndice(indiceTablaSimbolos-1).getLinea());
                 return false;
             }
         }
@@ -45,17 +46,17 @@ public class Parser {
                 tokens.removeFirst();
                 indiceTablaSimbolos++;
             } else {
-                reportarError("Error [Fase Sintáctica]: La línea " + tablaSimbolos.obtenerPorIndice(indiceTablaSimbolos-1).getLinea() + " contiene un error en su gramática, falta poaible token " + simboloActual);
+                reportarError("Error [Fase Sintáctica]: La línea " + tablaSimbolos.obtenerPorIndice(indiceTablaSimbolos-1).getLinea() + " contiene un error en su gramática, falta posible token " + simboloActual);
                 return false;
             }
         } else {
             String produccion = tabla.obtenerProduccion(simboloActual, simboloEntrada);
             if (produccion == null) {
                 if (simboloEntrada.equals(SIMBOLO_CIERRE)) {
-                    reportarError("Error [Fase Sintáctica]: La línea " + tablaSimbolos.obtenerPorIndice(indiceTablaSimbolos-1).getLinea() + " contiene un error en su gramática, falta poaible token " + tabla.SimbolosEsperados(simboloActual));
+                    reportarError("Error [Fase Sintáctica]: La línea " + tablaSimbolos.obtenerPorIndice(indiceTablaSimbolos-1).getLinea() + " contiene un error en su gramática, falta posible token " + tabla.SimbolosEsperados(simboloActual));
                     return false;
                 }
-                reportarError("Error [Fase Sintáctica]: La línea " + tablaSimbolos.obtenerPorIndice(indiceTablaSimbolos-1).getLinea() + " contiene un error en su gramática, falta poaible token " + tabla.SimbolosEsperados(simboloActual));
+                reportarError("Error [Fase Sintáctica]: La línea " + tablaSimbolos.obtenerPorIndice(indiceTablaSimbolos-1).getLinea() + " contiene un error en su gramática, falta posible token " + tabla.SimbolosEsperados(simboloActual));
                 return false;
             } else if (!produccion.isEmpty()) {
                 String[] simbolos = produccion.split(" ");
