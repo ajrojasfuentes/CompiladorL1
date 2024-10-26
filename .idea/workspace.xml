@@ -6,27 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="06bc2691-b7ae-48e3-aace-59657f37cd7b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/DefaultDFA.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/DefaultDFA.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/DefaultDFA.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/DefaultDFA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/DefaultSymbolInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/DefaultSymbolInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/DefaultSymbolInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/DefaultSymbolInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/DefaultTablaSimbolos.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/DefaultTablaSimbolos.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/DefaultTablaSimbolos.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/DefaultTablaSimbolos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/DefaultToken.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/DefaultToken.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/DefaultToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/DefaultToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/Lexer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/Parser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/TablaParseo.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/TablaParseo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/TablaParseo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/TablaParseo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/TablaSimbolosEntrada.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/TablaSimbolosEntrada.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/TablaSimbolosEntrada.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/TablaSimbolosEntrada.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/faseLexica.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/faseLexica.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/faseLexica.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/faseLexica.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/faseSintactica.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/faseSintactica.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/faseSintactica.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/faseSintactica.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/miCompilador.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/miCompilador.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/miCompilador.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/miCompilador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tablaDeSimbolos.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/tablaDeSimbolos.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +49,7 @@
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/antho/Documents/TEC/CompiladorL1&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/val/TEC/Compi/CompiladorL1 (copy)&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -84,14 +63,6 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\antho\Desktop\CompiladorL1" />
     </key>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
