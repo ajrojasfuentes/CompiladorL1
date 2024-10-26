@@ -20,6 +20,7 @@ Lexema: 2, Línea: 2
 Lexema: +, Línea: 2
 Lexema: 5, Línea: 2
 Lexema: ), Línea: 2
+Lexema: ), Línea: 2
 Lexema: ;, Línea: 2
 Lexema: z, Línea: 3
 Lexema: =, Línea: 3
@@ -29,7 +30,7 @@ Lexema: (, Línea: 3
 Lexema: var, Línea: 3
 Lexema: +, Línea: 3
 Lexema: 4, Línea: 3
-Lexema: ), Línea: 3
 Lexema: -, Línea: 3
 Lexema: 74, Línea: 3
+Lexema: ), Línea: 3
 Lexema: ;, Línea: 3

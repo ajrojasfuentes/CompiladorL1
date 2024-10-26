@@ -31,7 +31,6 @@ public class Parser {
             Token primerToken = tokens.getFirst();
             String simboloEntrada = primerToken.obtenerAtributo().toString();
             if (!compararSimbolos(simboloActual, simboloEntrada, tokens)) {
-                reportarError("Error [Fase Sintáctica]: La línea " + tablaSimbolos.obtenerPorIndice(indiceTablaSimbolos).getLinea() + " contiene un error en su gramática, falta token " + simboloActual);
                 tablaSimbolos.eliminar(simboloEntrada);
                 return false;
             }
@@ -46,14 +45,17 @@ public class Parser {
                 tokens.removeFirst();
                 indiceTablaSimbolos++;
             } else {
+                reportarError("Error [Fase Sintáctica]: La línea " + tablaSimbolos.obtenerPorIndice(indiceTablaSimbolos-1).getLinea() + " contiene un error en su gramática, falta poaible token " + simboloActual);
                 return false;
             }
         } else {
             String produccion = tabla.obtenerProduccion(simboloActual, simboloEntrada);
             if (produccion == null) {
                 if (simboloEntrada.equals(SIMBOLO_CIERRE)) {
+                    reportarError("Error [Fase Sintáctica]: La línea " + tablaSimbolos.obtenerPorIndice(indiceTablaSimbolos-1).getLinea() + " contiene un error en su gramática, falta poaible token " + tabla.SimbolosEsperados(simboloActual));
                     return false;
                 }
+                reportarError("Error [Fase Sintáctica]: La línea " + tablaSimbolos.obtenerPorIndice(indiceTablaSimbolos-1).getLinea() + " contiene un error en su gramática, falta poaible token " + tabla.SimbolosEsperados(simboloActual));
                 return false;
             } else if (!produccion.isEmpty()) {
                 String[] simbolos = produccion.split(" ");
